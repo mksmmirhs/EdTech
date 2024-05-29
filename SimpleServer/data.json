@@ -1,0 +1,67 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "mentor1",
+      "password": "password123",
+      "role": "mentor"
+    },
+    {
+      "id": 2,
+      "username": "admin1",
+      "password": "password123",
+      "role": "admin"
+    },
+    {
+      "id": 3,
+      "username": "student1",
+      "password": "password123",
+      "role": "student"
+    }
+  ],
+  "webinars": [
+    {
+      "id": 1,
+      "title": "Web Development Basics",
+      "slots": [
+        "2024-06-01T10:00:00",
+        "2024-06-02T14:00:00",
+        "2024-06-03T18:00:00"
+      ],
+      "status": "pending"
+    }
+  ],
+  "courses": [
+    {
+      "id": 1,
+      "title": "Advanced JavaScript",
+      "modules": [
+        {
+          "id": 1,
+          "title": "Introduction",
+          "videoUrl": "https://www.youtube.com/watch?v=abc123"
+        },
+        {
+          "id": 2,
+          "title": "Closures",
+          "videoUrl": "https://www.youtube.com/watch?v=def456"
+        }
+      ],
+      "status": "pending"
+    }
+  ],
+  "assessments": [
+    {
+      "id": 1,
+      "courseId": 1,
+      "questions": [
+        {
+          "id": 1,
+          "question": "What is closure in JavaScript?",
+          "options": ["Option 1", "Option 2", "Option 3", "Option 4"],
+          "correctOption": 3
+        }
+      ]
+    }
+  ]
+}
