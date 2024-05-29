@@ -16,7 +16,7 @@ import Button from "@mui/material/Button";
 import { NavLink } from "react-router-dom";
 
 const drawerWidth = 240;
-const navItems = ["Home", "Webinar", "Courses", "Login"];
+const navItems = ["home", "webinar", "courses"];
 
 function NavBar(props) {
   const { window } = props;
@@ -37,8 +37,12 @@ function NavBar(props) {
           <ListItem key={item} disablePadding>
             {/* Drawer link set */}
             <NavLink
-              to={`${item === "Home" ? "/" : item}`}
-              style={{ textDecoration: "none", color: "gray" }}
+              to={`${item === "home" ? "/" : item}`}
+              style={{
+                textDecoration: "none",
+                color: "gray",
+                textTransform: "uppercase",
+              }}
             >
               <ListItemButton sx={{ textAlign: "center" }}>
                 <ListItemText primary={item} />
@@ -46,6 +50,19 @@ function NavBar(props) {
             </NavLink>
           </ListItem>
         ))}
+
+        {/*  conditional logout/login button */}
+        <ListItem disablePadding>
+          {/* Drawer link set */}
+          <NavLink
+            to={`logout`}
+            style={{ textDecoration: "none", color: "gray" }}
+          >
+            <ListItemButton sx={{ textAlign: "center" }}>
+              <ListItemText primary={"Logout"} />
+            </ListItemButton>
+          </NavLink>
+        </ListItem>
       </List>
     </Box>
   );
@@ -74,12 +91,19 @@ function NavBar(props) {
           >
             EdTech
           </Typography>
+          {/* Nav Links for dextop */}
           <Box sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
               <NavLink key={item} to={`${item === "Home" ? "/" : item}`}>
                 <Button sx={{ color: "#fff" }}>{item}</Button>
               </NavLink>
             ))}
+          </Box>
+          {/* Add login and logout button conditionally  button */}
+          <Box>
+            <NavLink to={"/login"}>
+              <Button sx={{ color: "#fff" }}>Login</Button>
+            </NavLink>
           </Box>
         </Toolbar>
       </AppBar>
