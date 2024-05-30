@@ -3,7 +3,7 @@ function setJwt(token) {
 }
 
 function getJwt() {
-  localStorage.getItem("token");
+  return localStorage.getItem("token");
 }
 
 function removeJwt() {

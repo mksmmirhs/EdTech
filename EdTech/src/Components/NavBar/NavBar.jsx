@@ -1,4 +1,3 @@
-import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -14,13 +13,17 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { NavLink } from "react-router-dom";
+import { AuthContext } from "../../AuthContext/AuthProvider";
+import { useContext, useState } from "react";
 
 const drawerWidth = 240;
 const navItems = ["home", "webinar", "courses"];
 
 function NavBar(props) {
+  const { user } = useContext(AuthContext);
   const { window } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  console.log(user?.username);
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -29,7 +32,7 @@ function NavBar(props) {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        EdTech
+        Tech
       </Typography>
       <Divider />
       <List>
