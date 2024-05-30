@@ -15,24 +15,28 @@ import Button from "@mui/material/Button";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../AuthContext/AuthProvider";
 import { useContext, useState } from "react";
+import { jwtLocalStorage } from "../../utils/jwtLocalStorage";
 
 const drawerWidth = 240;
 const navItems = ["home", "webinar", "courses"];
 
 function NavBar(props) {
-  const { user } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
-  console.log(user?.username);
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
-
+  // logout function
+  const handleLogout = () => {
+    setUser(null);
+    jwtLocalStorage.removeJwt();
+  };
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        Tech
+        EdTech
       </Typography>
       <Divider />
       <List>
@@ -55,17 +59,31 @@ function NavBar(props) {
         ))}
 
         {/*  conditional logout/login button */}
-        <ListItem disablePadding>
-          {/* Drawer link set */}
-          <NavLink
-            to={`logout`}
-            style={{ textDecoration: "none", color: "gray" }}
-          >
-            <ListItemButton sx={{ textAlign: "center" }}>
-              <ListItemText primary={"Logout"} />
-            </ListItemButton>
-          </NavLink>
-        </ListItem>
+        {user ? (
+          <ListItem disablePadding>
+            {/* Drawer link set */}
+            <NavLink
+              to={`logout`}
+              style={{ textDecoration: "none", color: "gray" }}
+            >
+              <ListItemButton sx={{ textAlign: "center" }}>
+                <ListItemText onClick={handleLogout} primary={"Logout"} />
+              </ListItemButton>
+            </NavLink>
+          </ListItem>
+        ) : (
+          <ListItem disablePadding>
+            {/* Drawer link set */}
+            <NavLink
+              to={`login`}
+              style={{ textDecoration: "none", color: "gray" }}
+            >
+              <ListItemButton sx={{ textAlign: "center" }}>
+                <ListItemText primary={"Login"} />
+              </ListItemButton>
+            </NavLink>
+          </ListItem>
+        )}
       </List>
     </Box>
   );
@@ -103,10 +121,16 @@ function NavBar(props) {
             ))}
           </Box>
           {/* Add login and logout button conditionally  button */}
-          <Box>
-            <NavLink to={"/login"}>
-              <Button sx={{ color: "#fff" }}>Login</Button>
-            </NavLink>
+          <Box sx={{ display: { xs: "none", sm: "block" } }}>
+            {user ? (
+              <Button sx={{ color: "#fff" }} onClick={handleLogout}>
+                Logout
+              </Button>
+            ) : (
+              <NavLink to={"/login"}>
+                <Button sx={{ color: "#fff" }}>Login</Button>
+              </NavLink>
+            )}
           </Box>
         </Toolbar>
       </AppBar>

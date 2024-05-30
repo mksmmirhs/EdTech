@@ -3,7 +3,7 @@ import { AuthContext } from "../../AuthContext/AuthProvider";
 import { Box, CircularProgress } from "@mui/material";
 
 function Loading({ children }) {
-  const { loading, user } = useContext(AuthContext);
+  const { loading } = useContext(AuthContext);
 
   if (loading) {
     return (

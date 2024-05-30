@@ -7,14 +7,21 @@ function SetUser({ children }) {
   const { setUser, setLoading } = useContext(AuthContext);
   useEffect(() => {
     setLoading(true);
+
+    // get jwt token from local storage
     const token = jwtLocalStorage.getJwt();
+    const currentTimeInMs = Date.now();
+
     if (token) {
       const decodedToken = jwtDecode(token);
-      setUser({
-        id: decodedToken.id,
-        username: decodedToken.username,
-        role: decodedToken.role,
-      });
+      // checks if jwt is expired or not
+      if (currentTimeInMs <= decodedToken.exp * 1000) {
+        setUser({
+          id: decodedToken.id,
+          username: decodedToken.username,
+          role: decodedToken.role,
+        });
+      }
     }
     setLoading(false);
   }, [setUser, setLoading]);

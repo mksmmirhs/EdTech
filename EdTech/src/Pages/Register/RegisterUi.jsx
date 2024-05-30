@@ -2,15 +2,19 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { Link } from "react-router-dom";
+import {
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Radio,
+  RadioGroup,
+} from "@mui/material";
 
-function LoginUi({ handleSubmit }) {
+function RegisterUi({ handleSubmit }) {
   return (
     <Container component="main" maxWidth="xs" sx={{ mt: 16 }}>
       <CssBaseline />
@@ -26,7 +30,7 @@ function LoginUi({ handleSubmit }) {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Sign up
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
@@ -50,6 +54,25 @@ function LoginUi({ handleSubmit }) {
             autoComplete="current-password"
           />
 
+          <FormControl>
+            <FormLabel id="role">Role</FormLabel>
+            <RadioGroup
+              aria-labelledby="role"
+              defaultValue="student"
+              name="radio-buttons-group"
+            >
+              <FormControlLabel
+                value="mentor"
+                control={<Radio />}
+                label="Mentor"
+              />
+              <FormControlLabel
+                value="student"
+                control={<Radio />}
+                label="Student"
+              />
+            </RadioGroup>
+          </FormControl>
           <Button
             type="submit"
             fullWidth
@@ -63,15 +86,8 @@ function LoginUi({ handleSubmit }) {
               },
             }}
           >
-            Sign In
+            Sign up
           </Button>
-          <Grid container>
-            <Grid item>
-              <Link to="/signup" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
         </Box>
       </Box>
 
@@ -80,4 +96,4 @@ function LoginUi({ handleSubmit }) {
   );
 }
 
-export default LoginUi;
+export default RegisterUi;
