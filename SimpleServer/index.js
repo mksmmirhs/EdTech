@@ -24,7 +24,8 @@ async function run() {
           user.username === req.body.username &&
           user.password === req.body.password
         ) {
-          loggedInUser = user;
+          loggedInUser = { ...user };
+          delete loggedInUser.password;
           // create jwt token
           const jwtToken = jwt.sign(loggedInUser, process.env.JWT_SECRET, {
             expiresIn: "3h",
@@ -35,6 +36,41 @@ async function run() {
       //  send status for unauthorized access
       if (!loggedInUser) {
         res.status(401).send("Unauthorized");
+      }
+    });
+
+    //signup
+    // Route handler for writing the JSON file
+    app.post("/signup", (req, res) => {
+      const { users } = require("./users.json");
+      let duplicateUser = false;
+      const newUser = req.body;
+      newUser.id = users.length + 1;
+      users.forEach((user) => {
+        if (user.username === newUser.username) {
+          duplicateUser = true;
+          return res.status(409).send("duplicate username");
+        }
+      });
+      if (!duplicateUser) {
+        users.push(newUser);
+        // Convert data to JSON string
+        const jsonData = JSON.stringify({ users }); // Add indentation for readability (optional)
+
+        // Write data to file
+        fs.writeFile("users.json", jsonData, "utf8", (err) => {
+          if (err) {
+            console.error(err);
+            return res.status(500).send("Error writing JSON file");
+          }
+
+          console.log("JSON file written successfully");
+          // create jwt token
+          const jwtToken = jwt.sign(newUser, process.env.JWT_SECRET, {
+            expiresIn: "3h",
+          });
+          res.status(200).send(jwtToken);
+        });
       }
     });
   } finally {
