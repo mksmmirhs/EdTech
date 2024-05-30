@@ -18,7 +18,7 @@ import { useContext, useState } from "react";
 import { jwtLocalStorage } from "../../utils/jwtLocalStorage";
 
 const drawerWidth = 240;
-const navItems = ["home", "webinar", "courses"];
+const navItems = ["home"];
 
 function NavBar(props) {
   const { user, setUser } = useContext(AuthContext);
@@ -63,7 +63,7 @@ function NavBar(props) {
           <ListItem disablePadding>
             {/* Drawer link set */}
             <NavLink
-              to={`logout`}
+              onClick={handleLogout}
               style={{ textDecoration: "none", color: "gray" }}
             >
               <ListItemButton sx={{ textAlign: "center" }}>
@@ -94,7 +94,11 @@ function NavBar(props) {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar component="nav" sx={{ backgroundColor: "gray" }}>
+      <AppBar
+        component="nav"
+        position="sticky"
+        sx={{ backgroundColor: "gray" }}
+      >
         <Toolbar>
           <IconButton
             color="inherit"
