@@ -94,7 +94,7 @@ function NavBar(props) {
           {/* Nav Links for dextop */}
           <Box sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
-              <NavLink key={item} to={`${item === "Home" ? "/" : item}`}>
+              <NavLink key={item} to={`${item === "home" ? "/" : item}`}>
                 <Button sx={{ color: "#fff" }}>{item}</Button>
               </NavLink>
             ))}
