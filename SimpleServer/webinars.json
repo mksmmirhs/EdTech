@@ -1,0 +1,64 @@
+{
+  "webinars": [
+    {
+      "id": 1,
+      "title": "Web Development Basics",
+      "slots": [
+        "2024-06-01T10:00:00",
+        "2024-06-02T14:00:00",
+        "2024-06-03T18:00:00"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": 2,
+      "title": "Advanced Python Programming",
+      "slots": [
+        "2024-06-05T09:00:00",
+        "2024-06-06T13:00:00",
+        "2024-06-07T17:00:00"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": 3,
+      "title": "Data Science with R",
+      "slots": [
+        "2024-06-10T11:00:00",
+        "2024-06-11T15:00:00",
+        "2024-06-12T19:00:00"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": 4,
+      "title": "Machine Learning Fundamentals",
+      "slots": [
+        "2024-06-15T08:00:00",
+        "2024-06-16T12:00:00",
+        "2024-06-17T16:00:00"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": 5,
+      "title": "Introduction to Cloud Computing",
+      "slots": [
+        "2024-06-20T10:00:00",
+        "2024-06-21T14:00:00",
+        "2024-06-22T18:00:00"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": 6,
+      "title": "Cybersecurity Essentials",
+      "slots": [
+        "2024-06-25T09:00:00",
+        "2024-06-26T13:00:00",
+        "2024-06-27T17:00:00"
+      ],
+      "status": "approved"
+    }
+  ]
+}

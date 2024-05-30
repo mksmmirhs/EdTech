@@ -1,0 +1,106 @@
+{
+  "courses": [
+    {
+      "id": 1,
+      "title": "Advanced JavaScript",
+      "modules": [
+        {
+          "id": 1,
+          "title": "Introduction",
+          "videoUrl": "https://www.youtube.com/watch?v=abc123"
+        },
+        {
+          "id": 2,
+          "title": "Closures",
+          "videoUrl": "https://www.youtube.com/watch?v=def456"
+        }
+      ],
+      "status": "approved"
+    },
+    {
+      "id": 2,
+      "title": "Web Development with React",
+      "modules": [
+        {
+          "id": 1,
+          "title": "Getting Started",
+          "videoUrl": "https://www.youtube.com/watch?v=ghi789"
+        },
+        {
+          "id": 2,
+          "title": "Component Lifecycle",
+          "videoUrl": "https://www.youtube.com/watch?v=jkl012"
+        }
+      ],
+      "status": "approved"
+    },
+    {
+      "id": 3,
+      "title": "Python for Data Science",
+      "modules": [
+        {
+          "id": 1,
+          "title": "Data Analysis with Pandas",
+          "videoUrl": "https://www.youtube.com/watch?v=mno345"
+        },
+        {
+          "id": 2,
+          "title": "Data Visualization",
+          "videoUrl": "https://www.youtube.com/watch?v=pqr678"
+        }
+      ],
+      "status": "approved"
+    },
+    {
+      "id": 4,
+      "title": "Machine Learning Basics",
+      "modules": [
+        {
+          "id": 1,
+          "title": "Introduction to Machine Learning",
+          "videoUrl": "https://www.youtube.com/watch?v=stu901"
+        },
+        {
+          "id": 2,
+          "title": "Supervised Learning",
+          "videoUrl": "https://www.youtube.com/watch?v=vwx234"
+        }
+      ],
+      "status": "approved"
+    },
+    {
+      "id": 5,
+      "title": "Introduction to Cybersecurity",
+      "modules": [
+        {
+          "id": 1,
+          "title": "Basics of Cybersecurity",
+          "videoUrl": "https://www.youtube.com/watch?v=yzx567"
+        },
+        {
+          "id": 2,
+          "title": "Common Threats",
+          "videoUrl": "https://www.youtube.com/watch?v=abc890"
+        }
+      ],
+      "status": "approved"
+    },
+    {
+      "id": 6,
+      "title": "Cloud Computing Essentials",
+      "modules": [
+        {
+          "id": 1,
+          "title": "Cloud Computing Overview",
+          "videoUrl": "https://www.youtube.com/watch?v=def345"
+        },
+        {
+          "id": 2,
+          "title": "Services and Models",
+          "videoUrl": "https://www.youtube.com/watch?v=ghi678"
+        }
+      ],
+      "status": "approved"
+    }
+  ]
+}

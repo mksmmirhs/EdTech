@@ -73,6 +73,18 @@ async function run() {
         });
       }
     });
+
+    // get all webinars
+    app.get("/webinars", (req, res) => {
+      const { webinars } = require("./webinars.json");
+      res.json(webinars);
+    });
+
+    // get all courses
+    app.get("/courses", (req, res) => {
+      const { courses } = require("./courses.json");
+      res.json(courses);
+    });
   } finally {
   }
 }
