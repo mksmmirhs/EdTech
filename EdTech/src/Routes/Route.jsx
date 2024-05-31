@@ -4,6 +4,8 @@ import Main from "../Layout/Main";
 import Register from "../Pages/Register/Register";
 import Home from "../Pages/Home/Home";
 import DashBoard from "../Layout/DashBoard";
+import PrivateRoute from "./PrivateRoute";
+import CreateWebinar from "../Pages/CreateWebinar/CreateWebinar";
 
 const route = createBrowserRouter([
   {
@@ -26,7 +28,17 @@ const route = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element: <DashBoard></DashBoard>,
+    element: (
+      <PrivateRoute>
+        <DashBoard></DashBoard>
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        path: "createwebinar",
+        element: <CreateWebinar></CreateWebinar>,
+      },
+    ],
   },
 ]);
 

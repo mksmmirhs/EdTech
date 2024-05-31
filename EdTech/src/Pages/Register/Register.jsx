@@ -9,7 +9,7 @@ import RegisterUi from "./RegisterUi";
 function Register() {
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
-  const { setLoading } = useContext(AuthContext);
+  const { setLoading, setUser } = useContext(AuthContext);
 
   // fetch data function
   const fetchData = async (username, password, role) => {
@@ -25,6 +25,11 @@ function Register() {
         .then((res) => {
           // set jwt token to local storage
           jwtLocalStorage.setJwt(res.data);
+          setUser({
+            username,
+            password,
+            role,
+          });
           navigate(from, { replace: true });
         })
         .catch((err) => {

@@ -4,7 +4,6 @@ import { NavLink } from "react-router-dom";
 function ListLink({ text, link }) {
   return (
     <ListItem disablePadding>
-      {/* Drawer link set */}
       <NavLink
         to={link}
         style={{

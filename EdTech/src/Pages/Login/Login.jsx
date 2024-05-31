@@ -5,11 +5,13 @@ import SweetAlert from "../../utils/SweetAlert";
 import LoginUi from "./LoginUi";
 import { useContext } from "react";
 import { AuthContext } from "../../AuthContext/AuthProvider";
+import { jwtDecode } from "jwt-decode";
+import DashMenuData from "../../utils/DashMenuData";
 
 function Login() {
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
-  const { setLoading } = useContext(AuthContext);
+  const { setLoading, setUser, setMenu } = useContext(AuthContext);
 
   // fetch data function
   const fetchData = async (username, password) => {
@@ -22,8 +24,17 @@ function Login() {
           password,
         })
         .then((res) => {
+          const decodedToken = jwtDecode(res.data);
+          // set user to context
+          setUser({
+            id: decodedToken.id,
+            username: decodedToken.username,
+            role: decodedToken.role,
+          });
           // set jwt token to local storage
           jwtLocalStorage.setJwt(res.data);
+          // set dynamic menu
+          setMenu(DashMenuData[decodedToken.role]);
           navigate(from, { replace: true });
         })
         .catch((err) => {
