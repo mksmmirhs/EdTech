@@ -55,8 +55,7 @@ async function run() {
       if (!duplicateUser) {
         users.push(newUser);
         // Convert data to JSON string
-        const jsonData = JSON.stringify({ users }); // Add indentation for readability (optional)
-
+        const jsonData = JSON.stringify({ users });
         // Write data to file
         fs.writeFile("users.json", jsonData, "utf8", (err) => {
           if (err) {
@@ -84,6 +83,29 @@ async function run() {
     app.get("/courses", (req, res) => {
       const { courses } = require("./courses.json");
       res.json(courses);
+    });
+
+    // set new webinar
+    app.post("/createwebinar", (req, res) => {
+      const { webinars } = require("./webinars.json");
+      const newWebinars = req.body;
+      newWebinars.id = webinars.length + 1;
+
+      webinars.push(newWebinars);
+      // Convert data to JSON string
+      const jsonData = JSON.stringify({ webinars });
+      // Write data to file
+      fs.writeFile("webinars.json", jsonData, "utf8", (err) => {
+        if (err) {
+          console.error(err);
+          return res.status(500).send("Error writing JSON file");
+        }
+
+        console.log("JSON file written successfully");
+        // create jwt token
+
+        res.status(200).send("success");
+      });
     });
   } finally {
   }
