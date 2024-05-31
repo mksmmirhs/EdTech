@@ -6,6 +6,7 @@ function CardCourses({ course }) {
       sx={{
         margin: 5,
         width: "100%",
+        backgroundColor: "lightgray",
       }}
     >
       <CardHeader

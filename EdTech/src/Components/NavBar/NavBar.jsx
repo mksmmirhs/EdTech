@@ -58,19 +58,40 @@ function NavBar(props) {
           </ListItem>
         ))}
 
-        {/*  conditional logout/login button */}
+        {/*  conditional logout/login and dashboard button  */}
         {user ? (
-          <ListItem disablePadding>
-            {/* Drawer link set */}
-            <NavLink
-              onClick={handleLogout}
-              style={{ textDecoration: "none", color: "gray" }}
-            >
-              <ListItemButton sx={{ textAlign: "center" }}>
-                <ListItemText onClick={handleLogout} primary={"Logout"} />
-              </ListItemButton>
-            </NavLink>
-          </ListItem>
+          <>
+            <ListItem disablePadding>
+              {/* Drawer link set */}
+              <NavLink
+                to="dashboard"
+                style={{
+                  textDecoration: "none",
+                  color: "gray",
+                  textTransform: "uppercase",
+                }}
+              >
+                <ListItemButton sx={{ textAlign: "center" }}>
+                  <ListItemText primary={"Dashboard"} />
+                </ListItemButton>
+              </NavLink>
+            </ListItem>
+            <ListItem disablePadding>
+              {/* Drawer link set */}
+              <NavLink
+                to="dashboard"
+                style={{
+                  textDecoration: "none",
+                  color: "gray",
+                  textTransform: "uppercase",
+                }}
+              >
+                <ListItemButton sx={{ textAlign: "center" }}>
+                  <ListItemText onClick={handleLogout} primary={"Logout"} />
+                </ListItemButton>
+              </NavLink>
+            </ListItem>
+          </>
         ) : (
           <ListItem disablePadding>
             {/* Drawer link set */}

@@ -29,7 +29,10 @@ function CardWebinar({ webinar }) {
   );
   return (
     <Box>
-      <Card variant="outlined" sx={{ width: "100%" }}>
+      <Card
+        variant="outlined"
+        sx={{ width: "100%", backgroundColor: "lightgray" }}
+      >
         {card}
       </Card>
     </Box>

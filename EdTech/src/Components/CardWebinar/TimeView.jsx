@@ -10,6 +10,7 @@ function TimeView({ time, index }) {
         flexDirection: "column",
         color: "#fff",
         maxWidth: 1 / 3,
+        borderRadius: 1,
         p: 1,
       }}
     >
