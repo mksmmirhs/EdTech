@@ -137,6 +137,7 @@ function NavBar(props) {
           >
             EdTech
           </Typography>
+
           {/* Nav Links for dextop */}
           <Box sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
@@ -144,6 +145,15 @@ function NavBar(props) {
                 <Button sx={{ color: "#fff" }}>{item}</Button>
               </NavLink>
             ))}
+
+            {/* conditional dashboard link */}
+            {user ? (
+              <NavLink to={"dashboard"}>
+                <Button sx={{ color: "#fff" }}>dashboard</Button>
+              </NavLink>
+            ) : (
+              ""
+            )}
           </Box>
           {/* Add login and logout button conditionally  button */}
           <Box sx={{ display: { xs: "none", sm: "block" } }}>

@@ -2,9 +2,10 @@ import { jwtDecode } from "jwt-decode";
 import { jwtLocalStorage } from "../../utils/jwtLocalStorage";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../../AuthContext/AuthProvider";
+import DashMenuData from "../../utils/DashMenuData";
 
 function SetUser({ children }) {
-  const { setUser, setLoading } = useContext(AuthContext);
+  const { setUser, setLoading, setMenu } = useContext(AuthContext);
   useEffect(() => {
     setLoading(true);
 
@@ -21,10 +22,11 @@ function SetUser({ children }) {
           username: decodedToken.username,
           role: decodedToken.role,
         });
+        setMenu(DashMenuData[decodedToken.role]);
       }
     }
     setLoading(false);
-  }, [setUser, setLoading]);
+  }, [setUser, setLoading, setMenu]);
   return children;
 }
 
