@@ -12,6 +12,7 @@ function TimeView({ time, index }) {
         maxWidth: 1 / 3,
         borderRadius: 1,
         p: 1,
+        boxShadow: 1,
       }}
     >
       <Typography>{`Slot: ${index + 1}`}</Typography>

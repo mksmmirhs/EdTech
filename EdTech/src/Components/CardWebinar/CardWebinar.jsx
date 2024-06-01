@@ -31,7 +31,7 @@ function CardWebinar({ webinar }) {
     <Box>
       <Card
         variant="outlined"
-        sx={{ width: "100%", backgroundColor: "lightgray" }}
+        sx={{ width: "100%", backgroundColor: "lightgray", boxShadow: 1 }}
       >
         {card}
       </Card>

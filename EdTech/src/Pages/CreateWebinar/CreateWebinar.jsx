@@ -33,13 +33,14 @@ function CreateWebinar() {
       slots: [date1, date2, date3],
       status: "pending",
     };
+    // send data to backend
     getAxios
       .post("createwebinar", payload)
       .then((res) => {
-        SweetAlert("data saved", "success");
+        SweetAlert("Webinar saved", "success");
       })
       .catch((err) => {
-        SweetAlert("Duplicate Username", "error");
+        SweetAlert(err, "error");
       });
   };
   return (
