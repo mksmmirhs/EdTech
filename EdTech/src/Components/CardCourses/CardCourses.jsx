@@ -11,10 +11,12 @@ import {
   Box,
 } from "@mui/material";
 import { Info as InfoIcon } from "@mui/icons-material";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function CardCourses({ course, hide }) {
   const location = useLocation();
+  const navigate = useNavigate();
+
   return (
     <Card
       sx={{
@@ -72,7 +74,12 @@ function CardCourses({ course, hide }) {
           }}
         >
           <Box>
-            <Button size="small" variant="contained" color="primary">
+            <Button
+              size="small"
+              variant="contained"
+              color="primary"
+              onClick={() => navigate(`/dashboard/course/${course.id}`)}
+            >
               View Details
             </Button>
           </Box>

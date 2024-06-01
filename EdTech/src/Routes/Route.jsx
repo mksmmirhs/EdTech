@@ -13,6 +13,7 @@ import DashCourses from "../Pages/DashCourses/DashCourses";
 import EnrolledCourses from "../Pages/EnrolledCourse/EnrolledCourses";
 import EnrolledWebinar from "../Pages/EnrolledWebinar/EnrolledWebinar";
 import DashWebinar from "../Pages/DashWebinar/DashWebinar";
+import CourseDetails from "../Pages/CourseDetails/CourseDetails";
 
 const route = createBrowserRouter([
   {
@@ -72,6 +73,10 @@ const route = createBrowserRouter([
       {
         path: "webinars",
         element: <DashWebinar></DashWebinar>,
+      },
+      {
+        path: "course/:id",
+        element: <CourseDetails></CourseDetails>,
       },
     ],
   },

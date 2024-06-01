@@ -12,7 +12,7 @@ import { useLocation } from "react-router-dom";
 
 function CardWebinar({ webinar }) {
   const location = useLocation();
-  console.log(location);
+
   return (
     <Box
       sx={{
