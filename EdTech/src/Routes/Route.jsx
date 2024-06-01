@@ -8,6 +8,11 @@ import PrivateRoute from "./PrivateRoute";
 import CreateWebinar from "../Pages/CreateWebinar/CreateWebinar";
 import CreateCourse from "../Pages/CreateCourse/CreateCourse";
 import CreateAssessment from "../Pages/CreateAssessment/CreateAssessment";
+import DashHomePage from "../Pages/DashHomePage/DashHomepage";
+import DashCourses from "../Pages/DashCourses/DashCourses";
+import EnrolledCourses from "../Pages/EnrolledCourse/EnrolledCourses";
+import EnrolledWebinar from "../Pages/EnrolledWebinar/EnrolledWebinar";
+import DashWebinar from "../Pages/DashWebinar/DashWebinar";
 
 const route = createBrowserRouter([
   {
@@ -37,6 +42,10 @@ const route = createBrowserRouter([
     ),
     children: [
       {
+        path: "/dashboard",
+        element: <DashHomePage></DashHomePage>,
+      },
+      {
         path: "createwebinar",
         element: <CreateWebinar></CreateWebinar>,
       },
@@ -47,6 +56,22 @@ const route = createBrowserRouter([
       {
         path: "createassessment",
         element: <CreateAssessment></CreateAssessment>,
+      },
+      {
+        path: "courses",
+        element: <DashCourses></DashCourses>,
+      },
+      {
+        path: "enrolledcourses",
+        element: <EnrolledCourses></EnrolledCourses>,
+      },
+      {
+        path: "enrolledwebinars",
+        element: <EnrolledWebinar></EnrolledWebinar>,
+      },
+      {
+        path: "webinars",
+        element: <DashWebinar></DashWebinar>,
       },
     ],
   },

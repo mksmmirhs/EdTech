@@ -11,8 +11,10 @@ import {
   Box,
 } from "@mui/material";
 import { Info as InfoIcon } from "@mui/icons-material";
+import { useLocation } from "react-router-dom";
 
-function CardCourses({ course }) {
+function CardCourses({ course, hide }) {
+  const location = useLocation();
   return (
     <Card
       sx={{
@@ -60,25 +62,24 @@ function CardCourses({ course }) {
             : "No description available for this course."}
         </Typography>
       </CardContent>
-      <CardActions
-        disableSpacing
-        sx={{
-          padding: 2,
-          justifyContent: "space-between",
-          borderTop: "1px solid #e0e0e0",
-        }}
-      >
-        <Box>
-          <Button size="small" variant="contained" color="primary">
-            View Details
-          </Button>
-        </Box>
-        <Box>
-          <Button size="small" variant="outlined" color="secondary">
-            Enroll Now
-          </Button>
-        </Box>
-      </CardActions>
+      {location.pathname !== "/" ? (
+        <CardActions
+          disableSpacing
+          sx={{
+            padding: 2,
+            justifyContent: "space-between",
+            borderTop: "1px solid #e0e0e0",
+          }}
+        >
+          <Box>
+            <Button size="small" variant="contained" color="primary">
+              View Details
+            </Button>
+          </Box>
+        </CardActions>
+      ) : (
+        ""
+      )}
     </Card>
   );
 }

@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import { jwtLocalStorage } from "../utils/jwtLocalStorage";
 import { jwtDecode } from "jwt-decode";
 import DashMenuData from "../utils/DashMenuData";
+import getAxios from "../utils/getAxios";
 
 export const AuthContext = createContext(null);
 
@@ -9,6 +10,32 @@ function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [menu, setMenu] = useState([]);
+  const [webinars, setWebinars] = useState([]);
+  const [courses, setCourses] = useState([]);
+  const [dashCourses, setDashCourses] = useState([]);
+  const [dashWebinar, setDashWebinar] = useState([]);
+  const [dashEnrolledCourses, setDashEnrolledCourses] = useState([]);
+  const [studentData, setStudentData] = useState([]);
+  const [dashEnrolledWebinar, setDashEnrolledWebinar] = useState([]);
+
+  // get webinars data
+  useEffect(() => {
+    getAxios.get("webinars").then((res) => {
+      setWebinars(res.data);
+    });
+  }, []);
+  // get courses data
+  useEffect(() => {
+    getAxios.get("courses").then((res) => {
+      setCourses(res.data);
+    });
+  }, []);
+  // get student data
+  useEffect(() => {
+    getAxios.get("students").then((res) => {
+      setStudentData(res.data);
+    });
+  }, [user]);
 
   useEffect(() => {
     setLoading(true);
@@ -31,6 +58,8 @@ function AuthProvider({ children }) {
     }
     setLoading(false);
   }, [setUser, setLoading, setMenu]);
+
+  // set context
   const authInfo = {
     user,
     setUser,
@@ -38,6 +67,20 @@ function AuthProvider({ children }) {
     setLoading,
     menu,
     setMenu,
+    webinars,
+    setWebinars,
+    courses,
+    setCourses,
+    dashCourses,
+    setDashCourses,
+    studentData,
+    setStudentData,
+    dashEnrolledCourses,
+    setDashEnrolledCourses,
+    dashWebinar,
+    setDashWebinar,
+    dashEnrolledWebinar,
+    setDashEnrolledWebinar,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

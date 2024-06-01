@@ -8,8 +8,11 @@ import {
 } from "@mui/material";
 import DateTimeFormatter from "../../utils/DateTimeFormatter";
 import TimeView from "./TimeView";
+import { useLocation } from "react-router-dom";
 
 function CardWebinar({ webinar }) {
+  const location = useLocation();
+  console.log(location);
   return (
     <Box
       sx={{
@@ -44,11 +47,15 @@ function CardWebinar({ webinar }) {
             return <TimeView key={index} time={time} index={index} />;
           })}
         </Box>
-        <CardActions sx={{ justifyContent: "flex-end", p: 2 }}>
-          <Button size="small" variant="contained" color="primary">
-            View Details
-          </Button>
-        </CardActions>
+        {location.pathname !== "/" ? (
+          <CardActions sx={{ justifyContent: "flex-end", p: 2 }}>
+            <Button size="small" variant="contained" color="primary">
+              View Details
+            </Button>
+          </CardActions>
+        ) : (
+          ""
+        )}
       </Card>
     </Box>
   );

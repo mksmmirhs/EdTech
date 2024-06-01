@@ -1,23 +1,12 @@
 import { Box, Divider, Grid } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 import CardWebinar from "../../Components/CardWebinar/CardWebinar";
-import getAxios from "../../utils/getAxios";
+
 import CardCourses from "../../Components/CardCourses/CardCourses";
+import { AuthContext } from "../../AuthContext/AuthProvider";
 
 function Home() {
-  const [webinars, setWebinars] = useState([]);
-  const [courses, setCourses] = useState([]);
-
-  useEffect(() => {
-    getAxios.get("webinars").then((res) => {
-      setWebinars(res.data);
-    });
-  }, []);
-  useEffect(() => {
-    getAxios.get("courses").then((res) => {
-      setCourses(res.data);
-    });
-  }, []);
+  const { webinars, courses } = useContext(AuthContext);
 
   return (
     <Box component="div" m={4}>
