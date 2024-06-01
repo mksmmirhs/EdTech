@@ -128,6 +128,26 @@ async function run() {
         res.status(200).send("success");
       });
     });
+    // set new assessments
+    app.post("/createassessments", (req, res) => {
+      const { assessments } = require("./assessments.json");
+      const newAssessments = req.body;
+      newAssessments.id = assessments.length + 1;
+      assessments.push(newAssessments);
+      // Convert data to JSON string
+      const jsonData = JSON.stringify({ assessments });
+      // Write data to file
+      fs.writeFile("assessments.json", jsonData, "utf8", (err) => {
+        if (err) {
+          console.error(err);
+          return res.status(500).send("Error writing JSON file");
+        }
+
+        console.log("JSON file written successfully");
+
+        res.status(200).send("success");
+      });
+    });
   } finally {
   }
 }
