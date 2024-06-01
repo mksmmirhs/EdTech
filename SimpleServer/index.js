@@ -102,7 +102,28 @@ async function run() {
         }
 
         console.log("JSON file written successfully");
-        // create jwt token
+
+        res.status(200).send("success");
+      });
+    });
+
+    // set new course
+    app.post("/createcourse", (req, res) => {
+      const { courses } = require("./courses.json");
+      const newCourse = req.body;
+      newCourse.id = courses.length + 1;
+      newCourse.status = "pending";
+      courses.push(newCourse);
+      // Convert data to JSON string
+      const jsonData = JSON.stringify({ courses });
+      // Write data to file
+      fs.writeFile("courses.json", jsonData, "utf8", (err) => {
+        if (err) {
+          console.error(err);
+          return res.status(500).send("Error writing JSON file");
+        }
+
+        console.log("JSON file written successfully");
 
         res.status(200).send("success");
       });
