@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { Info as InfoIcon } from "@mui/icons-material";
 
-function CardCourses({ course }) {
+function DashCourseCard({ course }) {
   return (
     <Card
       sx={{
@@ -83,4 +83,4 @@ function CardCourses({ course }) {
   );
 }
 
-export default CardCourses;
+export default DashCourseCard;

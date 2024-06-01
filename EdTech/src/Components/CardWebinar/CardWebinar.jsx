@@ -1,39 +1,54 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+import {
+  Box,
+  Card,
+  CardActions,
+  CardContent,
+  Button,
+  Typography,
+} from "@mui/material";
 import DateTimeFormatter from "../../utils/DateTimeFormatter";
 import TimeView from "./TimeView";
 
 function CardWebinar({ webinar }) {
-  const card = (
-    <React.Fragment>
-      <CardContent>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          {webinar?.title}
-        </Typography>
-      </CardContent>
-      <Box sx={{ display: "flex", gap: 2, p: 1 }}>
-        {webinar.slots.map((slot, index) => {
-          const time = DateTimeFormatter(slot);
-          return <TimeView key={index} time={time} index={index}></TimeView>;
-        })}
-      </Box>
-      <CardActions>
-        <Button size="small">View Details</Button>
-      </CardActions>
-    </React.Fragment>
-  );
   return (
-    <Box>
+    <Box
+      sx={{
+        margin: 3,
+        width: "100%",
+        maxWidth: 345,
+        backgroundColor: "#fff",
+        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+        borderRadius: 2,
+        transition: "transform 0.3s",
+        "&:hover": {
+          transform: "scale(1.05)",
+        },
+      }}
+    >
       <Card
         variant="outlined"
-        sx={{ width: "100%", backgroundColor: "lightgray", boxShadow: 1 }}
+        sx={{ backgroundColor: "#f9f9f9", boxShadow: 1, borderRadius: 2 }}
       >
-        {card}
+        <CardContent>
+          <Typography
+            sx={{ fontSize: 18, fontWeight: "bold" }}
+            color="text.primary"
+            gutterBottom
+          >
+            {webinar?.title}
+          </Typography>
+        </CardContent>
+        <Box sx={{ display: "flex", gap: 2, p: 2, flexWrap: "wrap" }}>
+          {webinar.slots.map((slot, index) => {
+            const time = DateTimeFormatter(slot);
+            return <TimeView key={index} time={time} index={index} />;
+          })}
+        </Box>
+        <CardActions sx={{ justifyContent: "flex-end", p: 2 }}>
+          <Button size="small" variant="contained" color="primary">
+            View Details
+          </Button>
+        </CardActions>
       </Card>
     </Box>
   );
