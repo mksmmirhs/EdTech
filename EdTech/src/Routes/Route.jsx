@@ -7,6 +7,7 @@ import DashBoard from "../Layout/DashBoard";
 import PrivateRoute from "./PrivateRoute";
 import CreateWebinar from "../Pages/CreateWebinar/CreateWebinar";
 import CreateCourse from "../Pages/CreateCourse/CreateCourse";
+import CreateAssessment from "../Pages/CreateAssessment/CreateAssessment";
 
 const route = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const route = createBrowserRouter([
       {
         path: "createcourse",
         element: <CreateCourse></CreateCourse>,
+      },
+      {
+        path: "createassessment",
+        element: <CreateAssessment></CreateAssessment>,
       },
     ],
   },

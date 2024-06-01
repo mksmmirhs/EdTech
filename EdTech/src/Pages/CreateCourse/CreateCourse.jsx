@@ -34,7 +34,7 @@ function CreateCourse() {
       return { ...prevState, modules };
     });
   };
-  //
+  // add new module to form
   const handleAddModule = () => {
     setInputs((prevState) => ({
       ...prevState,
@@ -44,7 +44,7 @@ function CreateCourse() {
       ],
     }));
   };
-
+  // remove module from ui
   const handleRemoveModule = (index) => {
     setInputs((prevState) => {
       const modules = prevState.modules.filter((_, i) => i !== index);
@@ -85,6 +85,9 @@ function CreateCourse() {
             return (
               <Stack spacing={1} direction={"row"} key={index}>
                 <Box flex={4}>
+                  <Typography sx={{ mb: 2 }}>{`Module ${
+                    index + 1
+                  }`}</Typography>
                   <TextField
                     required
                     id="outlined-required"
