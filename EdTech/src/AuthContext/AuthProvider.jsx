@@ -17,6 +17,7 @@ function AuthProvider({ children }) {
   const [dashEnrolledCourses, setDashEnrolledCourses] = useState([]);
   const [studentData, setStudentData] = useState([]);
   const [dashEnrolledWebinar, setDashEnrolledWebinar] = useState([]);
+  const [assessments, setAssessments] = useState([]);
 
   // get webinars data
   useEffect(() => {
@@ -28,6 +29,13 @@ function AuthProvider({ children }) {
   useEffect(() => {
     getAxios.get("courses").then((res) => {
       setCourses(res.data);
+    });
+  }, []);
+  // get courses data
+  useEffect(() => {
+    getAxios.get("assessments").then((res) => {
+      console.log(res.data);
+      setAssessments(res.data);
     });
   }, []);
   // get student data
@@ -81,6 +89,8 @@ function AuthProvider({ children }) {
     setDashWebinar,
     dashEnrolledWebinar,
     setDashEnrolledWebinar,
+    assessments,
+    setAssessments,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

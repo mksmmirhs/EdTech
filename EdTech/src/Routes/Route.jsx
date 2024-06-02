@@ -17,6 +17,8 @@ import CourseDetails from "../Pages/CourseDetails/CourseDetails";
 import WebinarDetails from "../Pages/WebinarDetails/WebInarDetails";
 import PendingCourses from "../Pages/PendingCourses/PendingCourses";
 import PendingWebinar from "../Pages/PendingWebinar/PendingWebinar";
+import AssessmentList from "../Pages/Assessment/AssessmentList";
+import Assessment from "../Pages/Assessment/Assessment";
 
 const route = createBrowserRouter([
   {
@@ -92,6 +94,10 @@ const route = createBrowserRouter([
       {
         path: "pendingwebinar",
         element: <PendingWebinar></PendingWebinar>,
+      },
+      {
+        path: "assessments",
+        element: <AssessmentList></AssessmentList>,
       },
     ],
   },
