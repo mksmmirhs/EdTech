@@ -14,6 +14,9 @@ import EnrolledCourses from "../Pages/EnrolledCourse/EnrolledCourses";
 import EnrolledWebinar from "../Pages/EnrolledWebinar/EnrolledWebinar";
 import DashWebinar from "../Pages/DashWebinar/DashWebinar";
 import CourseDetails from "../Pages/CourseDetails/CourseDetails";
+import WebinarDetails from "../Pages/WebinarDetails/WebInarDetails";
+import PendingCourses from "../Pages/PendingCourses/PendingCourses";
+import PendingWebinar from "../Pages/PendingWebinar/PendingWebinar";
 
 const route = createBrowserRouter([
   {
@@ -77,6 +80,18 @@ const route = createBrowserRouter([
       {
         path: "course/:id",
         element: <CourseDetails></CourseDetails>,
+      },
+      {
+        path: "webinar/:id",
+        element: <WebinarDetails></WebinarDetails>,
+      },
+      {
+        path: "pendingcourses",
+        element: <PendingCourses></PendingCourses>,
+      },
+      {
+        path: "pendingwebinar",
+        element: <PendingWebinar></PendingWebinar>,
       },
     ],
   },

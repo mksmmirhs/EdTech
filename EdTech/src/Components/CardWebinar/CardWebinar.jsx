@@ -8,10 +8,11 @@ import {
 } from "@mui/material";
 import DateTimeFormatter from "../../utils/DateTimeFormatter";
 import TimeView from "./TimeView";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function CardWebinar({ webinar }) {
   const location = useLocation();
+  const navigate = useNavigate();
 
   return (
     <Box
@@ -49,7 +50,12 @@ function CardWebinar({ webinar }) {
         </Box>
         {location.pathname !== "/" ? (
           <CardActions sx={{ justifyContent: "flex-end", p: 2 }}>
-            <Button size="small" variant="contained" color="primary">
+            <Button
+              size="small"
+              variant="contained"
+              color="primary"
+              onClick={() => navigate(`/dashboard/webinar/${webinar.id}`)}
+            >
               View Details
             </Button>
           </CardActions>

@@ -12,12 +12,14 @@ import { useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../AuthContext/AuthProvider";
 import CourseModules from "./CourseModules";
+import getAxios from "../../utils/getAxios";
+import SweetAlert from "../../utils/SweetAlert";
 
 const CourseDetails = () => {
   const [course, setCourse] = useState(null);
   const [takenCourse, setTakenCourse] = useState(null);
   const { id } = useParams();
-  const { courses, setLoading, user } = useContext(AuthContext);
+  const { courses, setLoading, user, setCourses } = useContext(AuthContext);
 
   useEffect(() => {
     setLoading(true);
@@ -52,6 +54,25 @@ const CourseDetails = () => {
     );
   }
 
+  // approve and publish the pending course
+  const handleApproveCourse = () => {
+    const updatedCourses = courses.map((course) =>
+      course.id === parseInt(id) ? { ...course, status: "approved" } : course
+    );
+
+    setCourses(updatedCourses);
+
+    // send data to backend
+    getAxios
+      .patch("course", { courses: updatedCourses }) // Use the updated courses array
+      .then((res) => {
+        SweetAlert("Course status updated", "success");
+      })
+      .catch((err) => {
+        SweetAlert(err.message || "An error occurred", "error");
+      });
+  };
+
   return (
     <Container maxWidth="md" sx={{ mt: 4 }}>
       <Card>
@@ -84,14 +105,24 @@ const CourseDetails = () => {
             borderTop: "1px solid #e0e0e0",
           }}
         >
-          {!takenCourse && user.role === "student" ? (
+          {!takenCourse && user.role === "student" && (
             <Box>
               <Button size="small" variant="contained" color="primary">
                 Take course
               </Button>
             </Box>
-          ) : (
-            ""
+          )}
+          {course.status === "pending" && user.role === "admin" && (
+            <Box>
+              <Button
+                size="small"
+                variant="contained"
+                color="primary"
+                onClick={handleApproveCourse}
+              >
+                Approve and publish
+              </Button>
+            </Box>
           )}
         </CardActions>
       </Card>

@@ -13,8 +13,11 @@ import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import SweetAlert from "../../utils/SweetAlert";
 import convertToISODate from "../../utils/convertToISODate";
 import getAxios from "../../utils/getAxios";
+import { useContext } from "react";
+import { AuthContext } from "../../AuthContext/AuthProvider";
 
 function CreateWebinar() {
+  const { webinars, setWebinars } = useContext(AuthContext);
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -29,10 +32,14 @@ function CreateWebinar() {
       return;
     }
     const payload = {
+      id: webinars.length + 1,
       title,
       slots: [date1, date2, date3],
       status: "pending",
+      students: [],
     };
+    // update webinar
+    setWebinars([...webinars, payload]);
     // send data to backend
     getAxios
       .post("createwebinar", payload)

@@ -6,11 +6,13 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import getAxios from "../../utils/getAxios";
 import SweetAlert from "../../utils/SweetAlert";
+import { AuthContext } from "../../AuthContext/AuthProvider";
 
 function CreateCourse() {
+  const { courses, setCourses } = useContext(AuthContext);
   // initial input format
   const inputFormat = {
     title: "",
@@ -22,7 +24,7 @@ function CreateCourse() {
       },
     ],
   };
-  //   input state
+  // input state
   const [inputs, setInputs] = useState(inputFormat);
 
   // form module change
@@ -52,17 +54,24 @@ function CreateCourse() {
     });
   };
 
-  //   form submit
+  // form submit
   const handleFormSubmit = (event) => {
     event.preventDefault();
     // send data to backend
+    const newCourse = {
+      ...inputs,
+      id: courses.length + 1,
+      status: "pending",
+      students: [],
+    };
+    setCourses([...courses, newCourse]);
     getAxios
-      .post("createcourse", inputs)
+      .post("createcourse", newCourse)
       .then((res) => {
         SweetAlert("Course saved", "success");
       })
       .catch((err) => {
-        SweetAlert(err, "error");
+        SweetAlert(err.message, "error");
       });
   };
 

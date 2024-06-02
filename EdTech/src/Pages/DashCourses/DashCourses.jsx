@@ -9,7 +9,9 @@ function DashCourses() {
 
   useEffect(() => {
     const filterCourses = courses.filter((course) => {
-      return !course?.students?.includes(user.id);
+      return (
+        !course?.students?.includes(user.id) && course.status === "approved"
+      );
     });
     setDashCourses(filterCourses);
   }, [user.id, courses, setDashCourses]);

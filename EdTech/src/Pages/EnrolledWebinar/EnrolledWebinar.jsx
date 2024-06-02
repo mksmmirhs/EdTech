@@ -9,7 +9,9 @@ function EnrolledWebinar() {
   // filter enrolled webinar
   useEffect(() => {
     const filterWebinar = webinars.filter((webinar) => {
-      return webinar?.students?.includes(user.id);
+      return (
+        webinar?.students?.includes(user.id) && webinar.status === "approved"
+      );
     });
     setDashEnrolledWebinar(filterWebinar);
   }, [user.id, webinars, setDashEnrolledWebinar]);
