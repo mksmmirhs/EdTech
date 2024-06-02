@@ -1,0 +1,10 @@
+{
+  "data": [
+    {
+      "id": 3,
+      "enrolledCourses": [1, 2],
+      "takenQuizzes": [1],
+      "attendedWebinars": [1]
+    }
+  ]
+}

@@ -8,7 +8,8 @@
         "2024-06-02T14:00:00",
         "2024-06-03T18:00:00"
       ],
-      "status": "approved"
+      "status": "approved",
+      "students": []
     },
     {
       "id": 2,
@@ -18,7 +19,8 @@
         "2024-06-06T13:00:00",
         "2024-06-07T17:00:00"
       ],
-      "status": "approved"
+      "status": "approved",
+      "students": []
     },
     {
       "id": 3,
@@ -28,7 +30,8 @@
         "2024-06-11T15:00:00",
         "2024-06-12T19:00:00"
       ],
-      "status": "approved"
+      "status": "approved",
+      "students": []
     },
     {
       "id": 4,
@@ -38,7 +41,8 @@
         "2024-06-16T12:00:00",
         "2024-06-17T16:00:00"
       ],
-      "status": "approved"
+      "status": "approved",
+      "students": [3]
     },
     {
       "id": 5,
@@ -48,7 +52,8 @@
         "2024-06-21T14:00:00",
         "2024-06-22T18:00:00"
       ],
-      "status": "approved"
+      "status": "approved",
+      "students": []
     },
     {
       "id": 6,
@@ -58,7 +63,19 @@
         "2024-06-26T13:00:00",
         "2024-06-27T17:00:00"
       ],
-      "status": "approved"
+      "status": "approved",
+      "students": [3]
+    },
+    {
+      "id": 7,
+      "title": "abbb",
+      "slots": [
+        "2024-06-01T18:20:00",
+        "2024-06-01T18:15:00",
+        "2024-06-01T18:15:00"
+      ],
+      "status": "approved",
+      "students": []
     }
   ]
 }

@@ -10,7 +10,8 @@
           "options": ["Option 1", "Option 2", "Option 3", "Option 4"],
           "correctOption": 3
         }
-      ]
+      ],
+      "students": [3]
     }
   ]
 }

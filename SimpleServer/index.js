@@ -89,7 +89,6 @@ async function run() {
     app.post("/createwebinar", (req, res) => {
       const { webinars } = require("./webinars.json");
       const newWebinars = req.body;
-      newWebinars.id = webinars.length + 1;
 
       webinars.push(newWebinars);
       // Convert data to JSON string
@@ -111,8 +110,7 @@ async function run() {
     app.post("/createcourse", (req, res) => {
       const { courses } = require("./courses.json");
       const newCourse = req.body;
-      newCourse.id = courses.length + 1;
-      newCourse.status = "pending";
+
       courses.push(newCourse);
       // Convert data to JSON string
       const jsonData = JSON.stringify({ courses });
@@ -147,6 +145,56 @@ async function run() {
 
         res.status(200).send("success");
       });
+    });
+
+    // update course
+
+    app.patch("/course", (req, res) => {
+      const update = req.body;
+
+      // Convert data to JSON string
+      const jsonData = JSON.stringify(update);
+      // Write data to file
+      fs.writeFile("courses.json", jsonData, "utf8", (err) => {
+        if (err) {
+          console.error(err);
+          return res.status(500).send("Error writing JSON file");
+        }
+
+        console.log("JSON file written successfully");
+
+        res.status(200).send("success");
+      });
+    });
+    // get student data
+    app.get("/students", (req, res) => {
+      const { data } = require("./students.json");
+      res.json(data);
+    });
+
+    // update Webinar
+
+    app.patch("/webinar", (req, res) => {
+      const update = req.body;
+
+      // Convert data to JSON string
+      const jsonData = JSON.stringify(update);
+      // Write data to file
+      fs.writeFile("webinars.json", jsonData, "utf8", (err) => {
+        if (err) {
+          console.error(err);
+          return res.status(500).send("Error writing JSON file");
+        }
+
+        console.log("JSON file written successfully");
+
+        res.status(200).send("success");
+      });
+    });
+    // get student data
+    app.get("/students", (req, res) => {
+      const { data } = require("./students.json");
+      res.json(data);
     });
   } finally {
   }
