@@ -54,6 +54,27 @@ const CourseDetails = () => {
     );
   }
 
+  // Student take course
+  const handleEnrollCourse = () => {
+    const updatedCourses = courses.map((course) =>
+      course.id === parseInt(id)
+        ? { ...course, students: [...course.students, user.id] }
+        : course
+    );
+
+    setCourses(updatedCourses);
+
+    // send data to backend
+    getAxios
+      .patch("course", { courses: updatedCourses }) // Use the updated courses array
+      .then((res) => {
+        SweetAlert("Course status updated", "success");
+      })
+      .catch((err) => {
+        SweetAlert(err.message || "An error occurred", "error");
+      });
+  };
+
   // approve and publish the pending course
   const handleApproveCourse = () => {
     const updatedCourses = courses.map((course) =>
@@ -107,7 +128,12 @@ const CourseDetails = () => {
         >
           {!takenCourse && user.role === "student" && (
             <Box>
-              <Button size="small" variant="contained" color="primary">
+              <Button
+                size="small"
+                variant="contained"
+                color="primary"
+                onClick={handleEnrollCourse}
+              >
                 Take course
               </Button>
             </Box>

@@ -15,12 +15,14 @@ import { useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../AuthContext/AuthProvider";
 import dayjs from "dayjs";
+import SweetAlert from "../../utils/SweetAlert";
+import getAxios from "../../utils/getAxios";
 
 const WebinarDetails = () => {
   const [webinar, setWebinar] = useState(null);
   const [registered, setRegistered] = useState(false);
   const { id } = useParams();
-  const { webinars, setLoading, user } = useContext(AuthContext);
+  const { webinars, setLoading, user, setWebinars } = useContext(AuthContext);
 
   useEffect(() => {
     setLoading(true);
@@ -56,6 +58,45 @@ const WebinarDetails = () => {
       </Container>
     );
   }
+
+  // Enroll student to webinar webinars
+  const handleStudentEnroll = () => {
+    const updatedWebinar = webinars.map((webinar) =>
+      webinar.id === parseInt(id)
+        ? { ...webinar, students: [...webinar.students, user.id] }
+        : webinar
+    );
+
+    setWebinars(updatedWebinar);
+
+    // send data to backend
+    getAxios
+      .patch("webinar", { webinars: updatedWebinar }) // Use the updated courses array
+      .then((res) => {
+        SweetAlert("Webinar status updated", "success");
+      })
+      .catch((err) => {
+        SweetAlert(err.message || "An error occurred", "error");
+      });
+  };
+  // approve and publish the pending webinars
+  const handleApproveWebinar = () => {
+    const updatedWebinar = webinars.map((webinar) =>
+      webinar.id === parseInt(id) ? { ...webinar, status: "approved" } : webinar
+    );
+
+    setWebinars(updatedWebinar);
+
+    // send data to backend
+    getAxios
+      .patch("webinar", { webinars: updatedWebinar }) // Use the updated courses array
+      .then((res) => {
+        SweetAlert("Webinar status updated", "success");
+      })
+      .catch((err) => {
+        SweetAlert(err.message || "An error occurred", "error");
+      });
+  };
 
   return (
     <Container maxWidth="md" sx={{ mt: 4 }}>
@@ -93,14 +134,24 @@ const WebinarDetails = () => {
         >
           {!registered && user.role === "student" && (
             <Box>
-              <Button size="small" variant="contained" color="primary">
+              <Button
+                size="small"
+                variant="contained"
+                color="primary"
+                onClick={handleStudentEnroll}
+              >
                 Register
               </Button>
             </Box>
           )}
           {webinar.status === "pending" && user.role === "admin" && (
             <Box>
-              <Button size="small" variant="contained" color="primary">
+              <Button
+                size="small"
+                variant="contained"
+                color="primary"
+                onClick={handleApproveWebinar}
+              >
                 Approve and publish
               </Button>
             </Box>
