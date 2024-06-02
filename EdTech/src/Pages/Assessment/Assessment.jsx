@@ -11,7 +11,7 @@ const Assessment = ({ assessment, setSelectedAssessment }) => {
   const [score, setScore] = useState(0);
 
   useEffect(() => {
-    // shuffle the question array every time
+    // shuffle the questions
     const shuffledQuestions = [...assessment.questions].sort(
       () => Math.random() - 0.5
     );
@@ -43,6 +43,7 @@ const Assessment = ({ assessment, setSelectedAssessment }) => {
     setSelectedOptions({});
     setShowResult(false);
     setScore(0);
+    // shuffle the questions
     const shuffledQuestions = [...assessment.questions].sort(
       () => Math.random() - 0.5
     );

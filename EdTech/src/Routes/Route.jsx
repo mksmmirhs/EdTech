@@ -18,7 +18,9 @@ import WebinarDetails from "../Pages/WebinarDetails/WebInarDetails";
 import PendingCourses from "../Pages/PendingCourses/PendingCourses";
 import PendingWebinar from "../Pages/PendingWebinar/PendingWebinar";
 import AssessmentList from "../Pages/Assessment/AssessmentList";
-import Assessment from "../Pages/Assessment/Assessment";
+import StudentRoutes from "./StudentRoutes";
+import AdminRoutes from "./AdminRoutes";
+import MentorRoutes from "./MentorRoutes";
 
 const route = createBrowserRouter([
   {
@@ -53,31 +55,59 @@ const route = createBrowserRouter([
       },
       {
         path: "createwebinar",
-        element: <CreateWebinar></CreateWebinar>,
+        element: (
+          <MentorRoutes>
+            <CreateWebinar></CreateWebinar>
+          </MentorRoutes>
+        ),
       },
       {
         path: "createcourse",
-        element: <CreateCourse></CreateCourse>,
+        element: (
+          <MentorRoutes>
+            <CreateCourse></CreateCourse>
+          </MentorRoutes>
+        ),
       },
       {
         path: "createassessment",
-        element: <CreateAssessment></CreateAssessment>,
+        element: (
+          <MentorRoutes>
+            <CreateAssessment></CreateAssessment>
+          </MentorRoutes>
+        ),
       },
       {
         path: "courses",
-        element: <DashCourses></DashCourses>,
+        element: (
+          <StudentRoutes>
+            <DashCourses></DashCourses>
+          </StudentRoutes>
+        ),
       },
       {
         path: "enrolledcourses",
-        element: <EnrolledCourses></EnrolledCourses>,
+        element: (
+          <StudentRoutes>
+            <EnrolledCourses></EnrolledCourses>
+          </StudentRoutes>
+        ),
       },
       {
         path: "enrolledwebinars",
-        element: <EnrolledWebinar></EnrolledWebinar>,
+        element: (
+          <StudentRoutes>
+            <EnrolledWebinar></EnrolledWebinar>
+          </StudentRoutes>
+        ),
       },
       {
         path: "webinars",
-        element: <DashWebinar></DashWebinar>,
+        element: (
+          <StudentRoutes>
+            <DashWebinar></DashWebinar>
+          </StudentRoutes>
+        ),
       },
       {
         path: "course/:id",
@@ -89,15 +119,27 @@ const route = createBrowserRouter([
       },
       {
         path: "pendingcourses",
-        element: <PendingCourses></PendingCourses>,
+        element: (
+          <AdminRoutes>
+            <PendingCourses></PendingCourses>
+          </AdminRoutes>
+        ),
       },
       {
         path: "pendingwebinar",
-        element: <PendingWebinar></PendingWebinar>,
+        element: (
+          <AdminRoutes>
+            <PendingWebinar></PendingWebinar>
+          </AdminRoutes>
+        ),
       },
       {
         path: "assessments",
-        element: <AssessmentList></AssessmentList>,
+        element: (
+          <StudentRoutes>
+            <AssessmentList></AssessmentList>
+          </StudentRoutes>
+        ),
       },
     ],
   },
