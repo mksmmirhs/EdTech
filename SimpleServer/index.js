@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
-const fs = require("fs");
+const fs = require("fs").promises; // Use fs.promises for async file operations
 const path = require("path");
 const app = express();
 const jwt = require("jsonwebtoken");
@@ -15,10 +15,10 @@ app.use(cors());
 async function run() {
   try {
     // user login route
-    app.post("/login", (req, res) => {
+    app.post("/login", async (req, res) => {
       const { users } = require("./users.json");
       let loggedInUser = null;
-      // check if the logged in user on jason file
+      // check if the logged in user in the JSON file
       users.forEach((user) => {
         if (
           user.username === req.body.username &&
@@ -30,18 +30,18 @@ async function run() {
           const jwtToken = jwt.sign(loggedInUser, process.env.JWT_SECRET, {
             expiresIn: "3h",
           });
-          res.status(200).send(jwtToken);
+          return res.status(200).send(jwtToken);
         }
       });
-      //  send status for unauthorized access
+      // send status for unauthorized access
       if (!loggedInUser) {
         res.status(401).send("Unauthorized");
       }
     });
 
-    //signup
+    // signup
     // Route handler for writing the JSON file
-    app.post("/signup", (req, res) => {
+    app.post("/signup", async (req, res) => {
       const { users } = require("./users.json");
       let duplicateUser = false;
       const newUser = req.body;
@@ -49,7 +49,7 @@ async function run() {
       users.forEach((user) => {
         if (user.username === newUser.username) {
           duplicateUser = true;
-          return res.status(409).send("duplicate username");
+          return res.status(409).send("Duplicate username");
         }
       });
       if (!duplicateUser) {
@@ -57,19 +57,18 @@ async function run() {
         // Convert data to JSON string
         const jsonData = JSON.stringify({ users });
         // Write data to file
-        fs.writeFile("users.json", jsonData, "utf8", (err) => {
-          if (err) {
-            console.error(err);
-            return res.status(500).send("Error writing JSON file");
-          }
-
+        try {
+          await fs.writeFile("users.json", jsonData, "utf8");
           console.log("JSON file written successfully");
           // create jwt token
           const jwtToken = jwt.sign(newUser, process.env.JWT_SECRET, {
             expiresIn: "3h",
           });
           res.status(200).send(jwtToken);
-        });
+        } catch (err) {
+          console.error(err);
+          res.status(500).send("Error writing JSON file");
+        }
       }
     });
 
@@ -86,7 +85,7 @@ async function run() {
     });
 
     // set new webinar
-    app.post("/createwebinar", (req, res) => {
+    app.post("/createwebinar", async (req, res) => {
       const { webinars } = require("./webinars.json");
       const newWebinars = req.body;
 
@@ -94,20 +93,18 @@ async function run() {
       // Convert data to JSON string
       const jsonData = JSON.stringify({ webinars });
       // Write data to file
-      fs.writeFile("webinars.json", jsonData, "utf8", (err) => {
-        if (err) {
-          console.error(err);
-          return res.status(500).send("Error writing JSON file");
-        }
-
+      try {
+        await fs.writeFile("webinars.json", jsonData, "utf8");
         console.log("JSON file written successfully");
-
-        res.status(200).send("success");
-      });
+        res.status(200).send("Success");
+      } catch (err) {
+        console.error(err);
+        res.status(500).send("Error writing JSON file");
+      }
     });
 
     // set new course
-    app.post("/createcourse", (req, res) => {
+    app.post("/createcourse", async (req, res) => {
       const { courses } = require("./courses.json");
       const newCourse = req.body;
 
@@ -115,19 +112,18 @@ async function run() {
       // Convert data to JSON string
       const jsonData = JSON.stringify({ courses });
       // Write data to file
-      fs.writeFile("courses.json", jsonData, "utf8", (err) => {
-        if (err) {
-          console.error(err);
-          return res.status(500).send("Error writing JSON file");
-        }
-
+      try {
+        await fs.writeFile("courses.json", jsonData, "utf8");
         console.log("JSON file written successfully");
-
-        res.status(200).send("success");
-      });
+        res.status(200).send("Success");
+      } catch (err) {
+        console.error(err);
+        res.status(500).send("Error writing JSON file");
+      }
     });
+
     // set new assessments
-    app.post("/createassessments", (req, res) => {
+    app.post("/createassessments", async (req, res) => {
       const { assessments } = require("./assessments.json");
       const newAssessments = req.body;
       newAssessments.id = assessments.length + 1;
@@ -135,67 +131,66 @@ async function run() {
       // Convert data to JSON string
       const jsonData = JSON.stringify({ assessments });
       // Write data to file
-      fs.writeFile("assessments.json", jsonData, "utf8", (err) => {
-        if (err) {
-          console.error(err);
-          return res.status(500).send("Error writing JSON file");
-        }
-
+      try {
+        await fs.writeFile("assessments.json", jsonData, "utf8");
         console.log("JSON file written successfully");
-
-        res.status(200).send("success");
-      });
+        res.status(200).send("Success");
+      } catch (err) {
+        console.error(err);
+        res.status(500).send("Error writing JSON file");
+      }
     });
 
     // update course
-
-    app.patch("/course", (req, res) => {
+    app.patch("/course", async (req, res) => {
+      const { courses } = require("./courses.json");
       const update = req.body;
 
+      const updatedCourses = courses.map((course) =>
+        course.id === update.id ? { ...course, ...update } : course
+      );
+
       // Convert data to JSON string
-      const jsonData = JSON.stringify(update);
+      const jsonData = JSON.stringify({ courses: updatedCourses });
       // Write data to file
-      fs.writeFile("courses.json", jsonData, "utf8", (err) => {
-        if (err) {
-          console.error(err);
-          return res.status(500).send("Error writing JSON file");
-        }
-
+      try {
+        await fs.writeFile("courses.json", jsonData, "utf8");
         console.log("JSON file written successfully");
-
-        res.status(200).send("success");
-      });
+        res.status(200).send("Success");
+      } catch (err) {
+        console.error(err);
+        res.status(500).send("Error writing JSON file");
+      }
     });
+
+    // update webinar
+    app.patch("/webinar", async (req, res) => {
+      const { webinars } = require("./webinars.json");
+      const update = req.body;
+
+      const updatedWebinars = webinars.map((webinar) =>
+        webinar.id === update.id ? { ...webinar, ...update } : webinar
+      );
+
+      // Convert data to JSON string
+      const jsonData = JSON.stringify({ webinars: updatedWebinars });
+      // Write data to file
+      try {
+        await fs.writeFile("webinars.json", jsonData, "utf8");
+        console.log("JSON file written successfully");
+        res.status(200).send("Success");
+      } catch (err) {
+        console.error(err);
+        res.status(500).send("Error writing JSON file");
+      }
+    });
+
     // get student data
     app.get("/students", (req, res) => {
       const { data } = require("./students.json");
       res.json(data);
     });
 
-    // update Webinar
-
-    app.patch("/webinar", (req, res) => {
-      const update = req.body;
-
-      // Convert data to JSON string
-      const jsonData = JSON.stringify(update);
-      // Write data to file
-      fs.writeFile("webinars.json", jsonData, "utf8", (err) => {
-        if (err) {
-          console.error(err);
-          return res.status(500).send("Error writing JSON file");
-        }
-
-        console.log("JSON file written successfully");
-
-        res.status(200).send("success");
-      });
-    });
-    // get student data
-    app.get("/students", (req, res) => {
-      const { data } = require("./students.json");
-      res.json(data);
-    });
     // get assessments data
     app.get("/assessments", (req, res) => {
       const { assessments } = require("./assessments.json");
@@ -206,9 +201,10 @@ async function run() {
 }
 
 run().catch(console.dir);
-//test route
+
+// test route
 app.get("/", (req, res) => {
-  res.send("hello World");
+  res.send("Hello World");
 });
 
 app.listen(port, () => {
