@@ -196,6 +196,11 @@ async function run() {
       const { data } = require("./students.json");
       res.json(data);
     });
+    // get assessments data
+    app.get("/assessments", (req, res) => {
+      const { assessments } = require("./assessments.json");
+      res.json(assessments);
+    });
   } finally {
   }
 }
