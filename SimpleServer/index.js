@@ -143,15 +143,10 @@ async function run() {
 
     // update course
     app.post("/course", async (req, res) => {
-      const { courses } = require("./courses.json");
       const update = req.body;
 
-      const updatedCourses = courses.map((course) =>
-        course.id === update.id ? { ...course, ...update } : course
-      );
-
       // Convert data to JSON string
-      const jsonData = JSON.stringify({ courses: updatedCourses });
+      const jsonData = JSON.stringify({ courses: update.courses });
       // Write data to file
       try {
         await fs.writeFile("courses.json", jsonData, "utf8");
@@ -165,15 +160,10 @@ async function run() {
 
     // update webinar
     app.post("/webinar", async (req, res) => {
-      const { webinars } = require("./webinars.json");
       const update = req.body;
 
-      const updatedWebinars = webinars.map((webinar) =>
-        webinar.id === update.id ? { ...webinar, ...update } : webinar
-      );
-
       // Convert data to JSON string
-      const jsonData = JSON.stringify({ webinars: updatedWebinars });
+      const jsonData = JSON.stringify({ webinars: update.webinars });
       // Write data to file
       try {
         await fs.writeFile("webinars.json", jsonData, "utf8");
