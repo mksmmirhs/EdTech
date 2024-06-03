@@ -142,7 +142,7 @@ async function run() {
     });
 
     // update course
-    app.patch("/course", async (req, res) => {
+    app.post("/course", async (req, res) => {
       const { courses } = require("./courses.json");
       const update = req.body;
 
@@ -164,7 +164,7 @@ async function run() {
     });
 
     // update webinar
-    app.patch("/webinar", async (req, res) => {
+    app.post("/webinar", async (req, res) => {
       const { webinars } = require("./webinars.json");
       const update = req.body;
 
