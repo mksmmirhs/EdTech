@@ -5,7 +5,7 @@ import { Box, Container, Typography } from "@mui/material";
 const AdminRoutes = ({ children }) => {
   const { user } = useContext(AuthContext);
 
-  if (user.role === "student") {
+  if (user.role === "admin") {
     return children;
   }
   return (

@@ -16,8 +16,8 @@ import { AuthContext } from "../../AuthContext/AuthProvider";
 import SweetAlert from "../../utils/SweetAlert";
 
 function CreateAssessment() {
-  const { setLoading } = useContext(AuthContext);
-  const [courses, setCourses] = useState([]);
+  const { courses } = useContext(AuthContext);
+  const [selectCourse, setSelectCourses] = useState([]);
   const [selectedCourseId, setSelectedCourseId] = useState("");
   const initialData = {
     courseId: 1,
@@ -33,19 +33,8 @@ function CreateAssessment() {
   const [inputs, setInputs] = useState(initialData);
   // get all coursed
   useEffect(() => {
-    setLoading(true);
-    // Fetch course data from API
-    getAxios
-      .get("courses")
-      .then((response) => {
-        setCourses(response.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        setLoading(false);
-        console.error("Error fetching courses:", error);
-      });
-  }, []);
+    setSelectCourses(courses.filter((course) => course.status === "approved"));
+  }, [courses]);
 
   // Handle course selection change
   const handleCourseChange = (event) => {
@@ -135,7 +124,7 @@ function CreateAssessment() {
               label="Course"
               onChange={handleCourseChange}
             >
-              {courses.map((course) => (
+              {selectCourse.map((course) => (
                 <MenuItem key={course.id} value={course.id}>
                   {course.title}
                 </MenuItem>

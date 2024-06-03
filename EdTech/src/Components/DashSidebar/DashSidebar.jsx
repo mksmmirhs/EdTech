@@ -27,6 +27,7 @@ function DashSidebar() {
       sx={{
         boxShadow: 3,
         height: "100vh",
+        position: "fixed",
       }}
     >
       {/* home  */}
