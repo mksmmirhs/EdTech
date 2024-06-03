@@ -34,16 +34,9 @@ function AuthProvider({ children }) {
   // get courses data
   useEffect(() => {
     getAxios.get("assessments").then((res) => {
-      console.log(res.data);
       setAssessments(res.data);
     });
   }, []);
-  // get student data
-  useEffect(() => {
-    getAxios.get("students").then((res) => {
-      setStudentData(res.data);
-    });
-  }, [user]);
 
   useEffect(() => {
     setLoading(true);

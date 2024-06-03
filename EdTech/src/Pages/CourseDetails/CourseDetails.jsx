@@ -66,7 +66,7 @@ const CourseDetails = () => {
 
     // send data to backend
     getAxios
-      .patch("course", { courses: updatedCourses }) // Use the updated courses array
+      .post("course", { courses: updatedCourses }) // Use the updated courses array
       .then((res) => {
         SweetAlert("Course status updated", "success");
       })
@@ -85,7 +85,7 @@ const CourseDetails = () => {
 
     // send data to backend
     getAxios
-      .patch("course", { courses: updatedCourses }) // Use the updated courses array
+      .post("course", { courses: updatedCourses }) // Use the updated courses array
       .then((res) => {
         SweetAlert("Course status updated", "success");
       })
